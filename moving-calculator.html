@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<style>
+		html {
+			font-family: sans-serif;
+		}
+		.inputs {
+			display: grid;
+			grid-template-columns: 32em 3em;
+		}
+	</style>
+	<script>
+		function calculate() {
+			n = parseFloat(document.getElementById("n").value);
+			p = parseFloat(document.getElementById("p").value);
+			f = parseFloat(document.getElementById("f").value);
+			c = parseFloat(document.getElementById("c").value);
+			document.getElementById("b1").innerText = `benefit needs to be > ${Math.round( (f/n + c) / (p/100) )} kilodollars per year`
+			document.getElementById("b2").innerText = `or > ${Math.round( (f/n + c) / (p/100) * 1000 / 12)} dollars per month`
+		}
+		window.onload = calculate;
+	</script>
+	<body>
+			Calculate how much benefit a city would need to provide you for a move to be worthwhile
+		<br>
+		<br>
+		<br>b = recurring benefit a city provides you (kilodollars/year)
+		<br>This includes transportation convenience, culture, social and romantic benefits, location proximity to parents, etc.
+		<br>
+		<br>n = time staying in new city (years)
+		<br>assume we will either stay in the new city for n years or current city for n years.
+		<br>
+		<br>p = probability you will realize the benefits you're looking for (percentage)
+		<br>It's unlikely that moving to a new city will turn out exactly how you expect.
+		<br>Due to our own internal biases (grass is always greener on the other side), I estimate that the realized benefits will be less than you expect.
+		<br>But you can feel free to use any adjustment factor you prefer.
+		<br>
+		<br>f = fixed cost of moving (kilodollars)
+		<br>This includes flights, temporary housing, buying new things, re-establishing city ties, etc.
+		<br>This also includes switching teams/companies, dealing with immigration paperwork, etc.
+		<br>This also includes extra taxes levied on RSUs at IPO time.
+		<br>
+		<br>c = recurring cost of moving (kilodollars/year)
+		<br>This includes extra taxes (1k/mo), extra rent (1k/mo), loss of seattle benefits like nature, west coast timezone (0.5k/mo).
+		<br>Remember to account for new york city tax and new york state tax (most online estimators only account for ny state)
+		<br>I used https://smartasset.com/taxes/new-york-tax-calculator with zip code 10019
+		<br>
+		<br>b > (f/n + c) / (p/100)
+		<br>
+		<br>
+		<br>
+		<div class="inputs">
+			<label for="n">time staying in new city (years)</label>
+			<input type="number" name="n" value="10" id="n" oninput="calculate()">
+			<label for="p">probability you will realize the benefits you're looking for (percentage)</label>
+			<input type="number" name="p" value="90" id="p" oninput="calculate()">
+			<label for="f">fixed cost of moving (kilodollars)</label>
+			<input type="number" name="f" value="110" id="f" oninput="calculate()">
+			<label for="c">recurring cost of moving (kilodollars/year)</label>
+			<input type="number" name="c" value="30" id="c" oninput="calculate()">
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div id="b1"></div>
+		<div id="b2"></div>
+	</body>
+</html>
